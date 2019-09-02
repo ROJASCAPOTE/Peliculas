@@ -3,17 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Conection;
-
-import Vista.FmrTienda;
-import Vista.FrmPrincipal;
+package Modelo.dao;
 
 /**
  *
  * @author ACER E5
  */
-public class Start {
-    public static void main(String[] args) {
-        new ViewStore(new FrmPrincipal() ).iniciar();
-    }
+public class StoreDAO {
+    
 }

@@ -1,11 +1,11 @@
-package Modelo;
+package Modelo.vo;
 
-public class Store {
+public class StoreVO {
 
     private int idManagerStaff;
     private int idAddress;
 
-    public Store() {
+    public StoreVO() {
         this.idManagerStaff = 0;
         this.idAddress = 0;
     }

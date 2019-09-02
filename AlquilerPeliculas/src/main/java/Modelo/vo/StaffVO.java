@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Modelo;
+package Modelo.vo;
 
-public class Staff {
+public class StaffVO {
 
     private String firstName;
     private String lastName;
@@ -16,7 +16,7 @@ public class Staff {
     private String username;
     private String password;
 
-    public Staff() {
+    public StaffVO() {
         this.firstName = "";
         this.lastName = "";
         this.idAddress = 0;

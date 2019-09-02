@@ -55,30 +55,62 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="TIENDA" min="-2" pref="108" max="-2" attributes="0"/>
-                  <EmptySpace pref="384" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="btnTienda" max="32767" attributes="0"/>
+                      <Component id="btnRoles" max="32767" attributes="0"/>
+                      <Component id="btnCiudades" pref="108" max="32767" attributes="0"/>
+                      <Component id="btnPaises" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="441" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                  <Component id="TIENDA" min="-2" pref="36" max="-2" attributes="0"/>
-                  <EmptySpace pref="289" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
+                  <Component id="btnRoles" min="-2" pref="36" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btnCiudades" min="-2" pref="37" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btnPaises" min="-2" pref="37" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btnTienda" min="-2" pref="36" max="-2" attributes="0"/>
+                  <EmptySpace pref="174" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="TIENDA">
+        <Component class="javax.swing.JButton" name="btnTienda">
           <Properties>
             <Property name="text" type="java.lang.String" value="TIENDA"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTiendaActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnRoles">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="ROLES"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnCiudades">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="CIUDADES"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnPaises">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="PAISES"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPaisesActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

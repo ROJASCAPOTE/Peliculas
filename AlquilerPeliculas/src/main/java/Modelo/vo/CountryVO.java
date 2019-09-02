@@ -3,22 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Modelo;
+package Modelo.vo;
 
 /**
  *
  * @author ACER E5
  */
-public class Country {
+public class CountryVO {
     private int idContry;
     private String country;
 
-    public Country() {
+    public CountryVO() {
         this.idContry=0;
         this.country="";
     }
 
-    public Country(int idContry, String country) {
+    public CountryVO(int idContry, String country) {
         this.idContry = idContry;
         this.country = country;
     }
