@@ -18,7 +18,7 @@ public class Connection {
     /**
      * base de datos por defecto es test
      */
-    private String db = "ventas";
+    private String db = "sakila";
     /**
      * usuario
      */
@@ -40,10 +40,10 @@ public class Connection {
      * Constructor de clase
      */
     public Connection() {
-        this.url = "jdbc:mysql://localhost:3306/" + this.db;
+        this.url = "jdbc:mysql://localhost:3306/" + this.db + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
         try {
             //obtenemos el driver de para mysql
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             //obtenemos la conexión
             conn = DriverManager.getConnection(this.url, this.user, this.password);
             if (conn != null) {

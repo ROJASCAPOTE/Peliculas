@@ -1,17 +1,29 @@
-
 package Modelo.vo;
+
 public class AddressVO {
+
+    private int idAddress;
     private String address;
     private String address2;
     private String district;
     private int idCity;
     private String codePostal;
+    private String phone;
 
     public AddressVO() {
-        this.address="";
-        this.address2="";
-        this.idCity=0;
-        this.codePostal="";
+        this.address = "";
+        this.address2 = "";
+        this.idCity = 0;
+        this.codePostal = "";
+        this.phone = "";
+    }
+
+    public int getIdAddress() {
+        return idAddress;
+    }
+
+    public void setIdAddress(int idAddress) {
+        this.idAddress = idAddress;
     }
 
     public String getAddress() {
@@ -54,9 +66,17 @@ public class AddressVO {
         this.codePostal = codePostal;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     @Override
     public String toString() {
-        return "AddressVO{" + "address=" + address + ", address2=" + address2 + ", district=" + district + ", idCity=" + idCity + ", codePostal=" + codePostal + '}';
+        return address + " - " + district;
     }
-    
+
 }
