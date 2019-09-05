@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,38 +19,90 @@ import java.util.ArrayList;
  */
 public class StoreDAO extends Connection {
 
-    public ArrayList<AddressVO> consultListStore() {
-        ArrayList<AddressVO> addressList = new ArrayList<>();
+    private DefaultTableModel tablemodel = new DefaultTableModel();
+
+    public DefaultTableModel getTableAddress() {
+        int registros = 0;
         Statement stmt = null;
-        AddressVO addressVO;
+        String[] columNames = {"ID", "Address", "Address 2 ", "District", "City", "Postal code", "Phone"};
+        //obtenemos la cantidad de registros existentes en la tabla y se almacena en la variable "registros"
         try {
             stmt = this.getConexion().createStatement();
-            String sql = "SELECT * FROM address";
-            ResultSet resultado = stmt.executeQuery(sql);
-
-            while (resultado.next()) {
-                addressVO = new AddressVO();
-                addressVO.setIdAddress(resultado.getInt("address_id"));
-                addressVO.setAddress(resultado.getString("address"));
-                addressVO.setAddress2(resultado.getString("address2"));
-                addressVO.setDistrict(resultado.getString("district"));
-                addressVO.setIdCity(resultado.getInt("city_id"));
-                addressVO.setCodePostal(resultado.getString("postal_code"));
-                addressVO.setPhone(resultado.getString("phone"));
-                addressList.add(addressVO);
-            }
-
-        } catch (Exception e) {
-            System.out.println("Error en la consulta de address: " + e.getMessage());
-        } finally {
-            try {
-                if (stmt != null) {
-                    stmt.close();
-                }
-            } catch (SQLException ex) {
-
-            }
+            String sql = "SELECT count(*) as total FROM address";
+            ResultSet cantidad = stmt.executeQuery(sql);
+            cantidad.next();
+            registros = cantidad.getInt("total");
+            stmt.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
         }
-        return addressList;
+        //se crea una matriz con tantas filas y columnas que necesite
+        Object[][] data = new String[registros][7];
+        try {
+            stmt = this.getConexion().createStatement();
+            String sql2 = "SELECT a.address_id, a.address, a.address2, a.district, c.city, a.postal_code, a.phone  FROM address as a inner join city as c on (a.city_id = c.city_id)";
+            ResultSet res = stmt.executeQuery(sql2);
+            int i = 0;
+            while (res.next()) {
+                data[i][0] = res.getString(1);
+                data[i][1] = res.getString(2);
+                data[i][2] = res.getString(3);
+                data[i][3] = res.getString(4);
+                data[i][4] = res.getString(5);
+                data[i][5] = res.getString(6);
+                data[i][6] = res.getString(7);
+                i++;
+            }
+            stmt.close();
+            this.tablemodel.setDataVector(data, columNames);
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return this.tablemodel;
     }
+
+    public DefaultTableModel obtenerDireccion(String direccion) {
+        String sq1 = "SELECT count(*) FROM address as a inner join city as c on (a.city_id = c.city_id) "
+                + " WHERE address='" + direccion + "'";
+
+        String sql2 = "SELECT a.address_id, a.address, a.address2, a.district, c.city, a.postal_code, a.phone"
+                + " FROM address as a inner join city as c on (a.city_id = c.city_id)  WHERE  address like '%" + direccion + "%'";
+
+        int registros = 0;
+        Statement stmt = null;
+        String[] columNames = {"ID", "Address", "Address 2 ", "District", "City", "Postal code", "Phone"};
+        try {
+            stmt = this.getConexion().createStatement();
+            String sql = "SELECT count(*) as total FROM address";
+            ResultSet cantidad = stmt.executeQuery(sql);
+            cantidad.next();
+            registros = cantidad.getInt("total");
+            stmt.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        //se crea una matriz con tantas filas y columnas que necesite
+        Object[][] data = new String[registros][7];
+        try {
+            stmt = this.getConexion().createStatement();
+            ResultSet respuesta = stmt.executeQuery(sql2);
+            int i = 0;
+            while (respuesta.next()) {
+                data[i][0] = respuesta.getString(1);
+                data[i][1] = respuesta.getString(2);
+                data[i][2] = respuesta.getString(3);
+                data[i][3] = respuesta.getString(4);
+                data[i][4] = respuesta.getString(5);
+                data[i][5] = respuesta.getString(6);
+                data[i][6] = respuesta.getString(7);
+                i++;
+            }
+            stmt.close();
+            this.tablemodel.setDataVector(data, columNames);
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return this.tablemodel;
+    }
+    
 }

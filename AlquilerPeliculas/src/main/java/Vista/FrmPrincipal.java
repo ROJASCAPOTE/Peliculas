@@ -21,7 +21,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
      */
     public FrmPrincipal() {
         initComponents();
-       
+
     }
 
     /**
@@ -122,6 +122,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void btnTiendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTiendaActionPerformed
         switch (evt.getActionCommand()) {
+            case "CIUDADES":
+                FrmCountry country = new FrmCountry();
+                country.setLocationRelativeTo(null);
+                country.setTitle("STORE");
+                country.setVisible(true);
+                break;
             case "TIENDA":
                 FrmTienda frmTienda = new FrmTienda();
                 frmTienda.setLocationRelativeTo(null);
@@ -136,7 +142,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnPaisesActionPerformed
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCiudades;
