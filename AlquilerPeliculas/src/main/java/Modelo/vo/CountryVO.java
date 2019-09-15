@@ -5,6 +5,8 @@
  */
 package Modelo.vo;
 
+import java.util.Date;
+
 /**
  *
  * @author ACER E5
@@ -13,15 +15,18 @@ public class CountryVO {
 
     private int idContry;
     private String country;
+    private Date lastUpdate;
 
     public CountryVO() {
         this.idContry = 0;
         this.country = "";
+        this.lastUpdate = null;
     }
 
-    public CountryVO(int idContry, String country) {
+    public CountryVO(int idContry, String country, Date lastUpdate) {
         this.idContry = idContry;
         this.country = country;
+        this.lastUpdate = lastUpdate;
     }
 
     public int getIdContry() {
@@ -38,6 +43,14 @@ public class CountryVO {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public Date getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Date lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
 
 }

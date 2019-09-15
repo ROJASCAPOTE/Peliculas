@@ -5,7 +5,7 @@
  */
 package Modelo.dao;
 
-import Modelo.Connection.Connection;
+import Modelo.Connection.ConnectionBD;
 import Modelo.vo.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author ACER E5
  */
-public class StoreDAO extends Connection {
+public class StoreDAO extends ConnectionBD {
 
     private DefaultTableModel tablemodel = new DefaultTableModel();
 

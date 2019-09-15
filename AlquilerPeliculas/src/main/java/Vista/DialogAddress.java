@@ -15,7 +15,7 @@ public class DialogAddress extends javax.swing.JDialog {
 
     private AddressVO addressVO = new AddressVO();
 
-    FrmTienda frmTienda;
+    FrmStore frmTienda;
 
     String campo1, campo2;
 
