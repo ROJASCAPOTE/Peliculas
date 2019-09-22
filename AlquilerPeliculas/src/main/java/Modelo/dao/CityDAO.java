@@ -6,8 +6,8 @@
 package Modelo.dao;
 
 import Modelo.Connection.ConnectionBD;
-import Modelo.idao.ICountryDAO;
-import Modelo.vo.CountryVO;
+import Modelo.idao.ICityDAO;
+import Modelo.vo.CityVO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,33 +15,32 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author ACER E5
  */
-public class CountryDAO implements ICountryDAO {
+public class CityDAO implements ICityDAO {
 
     private ConnectionBD conn;
 
-    CountryDAO(ConnectionBD conn) {
+    public CityDAO(ConnectionBD conn) {
         this.conn = conn;
     }
 
     @Override
-    public int registrar(CountryVO a) {
+    public int registrar(CityVO a) {
         int resultado = 0;
-        String sql = "INSERT INTO country VALUES(? ,?, ?)";
+        String sql = "INSERT INTO city VALUES(? ,?, ?, ?)";
         PreparedStatement st = null;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String currentTime = sdf.format(a.getLastUpdate());
         try {
             st = conn.getConexion().prepareStatement(sql);
-            st.setInt(1, a.getIdContry());
-            st.setString(2, a.getCountry());
-            st.setString(3, currentTime);
+            st.setInt(1, a.getIdCity());
+            st.setString(2, a.getCity());
+            st.setInt(3, a.getCountryVO().getIdContry());
+            st.setString(4, currentTime);
             st.executeUpdate();
             resultado = 1;
         } catch (SQLException ex) {
@@ -61,30 +60,30 @@ public class CountryDAO implements ICountryDAO {
     }
 
     @Override
-    public int actualizar(CountryVO a) {
+    public int actualizar(CityVO a) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int eliminar(CountryVO a) {
+    public int eliminar(CityVO a) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<CountryVO> obtenerTodos() {
-        List<CountryVO> lista = null;
-        String sql = "SELECT * FROM country";
+    public List<CityVO> obtenerTodos() {
+        List<CityVO> lista = null;
+        String sql = "SELECT city_id, city FROM city";
         PreparedStatement st = null;
+        ResultSet rs = null;
         try {
             st = conn.getConexion().prepareStatement(sql);
             lista = new ArrayList<>();
-            ResultSet rs = st.executeQuery();
+            rs = st.executeQuery();
             while (rs.next()) {
-                CountryVO country = new CountryVO();
-                country.setIdContry(rs.getInt(1));
-                country.setCountry(rs.getString(2));
-                country.setLastUpdate(rs.getDate(3));
-                lista.add(country);
+                CityVO cityVO = new CityVO();
+                cityVO.setIdCity(Integer.parseInt(rs.getString(1)));
+                cityVO.setCity(rs.getString(2));
+                lista.add(cityVO);
             }
             rs.close();
             st.close();
@@ -92,52 +91,65 @@ public class CountryDAO implements ICountryDAO {
         }
 
         return lista;
-
     }
 
     @Override
-    public int getCantidaPaises() {
-        String sql = "SELECT count(*) as total FROM country";
+    public int getCantidadCity() {
+        String sql = "SELECT count(*) as total FROM city";
         PreparedStatement st = null;
-        ResultSet rs = null;
-        int numero = 0;
+        int cant = 0;
         try {
             st = conn.getConexion().prepareStatement(sql);
-            rs = st.executeQuery();
+            ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                numero = rs.getInt("total") + 1;
+                cant = rs.getInt("total") + 1;
             }
             rs.close();
             st.close();
         } catch (SQLException e) {
         }
-        return numero;
+        return cant;
     }
 
     @Override
-    public void getTableCountry(JTable country) {
-        PreparedStatement stmt;
-        ResultSet rs;
-        String sql = "SELECT country_id, country, Date(last_update)  FROM country";
-        try {
-            stmt = conn.getConexion().prepareStatement(sql);
-            rs = stmt.executeQuery();
-            while (rs.next()) {
-                DefaultTableModel modelo = (DefaultTableModel) country.getModel();
-                modelo.addRow(new Object[]{
-                    rs.getString(1),
-                    rs.getString(2),
-                    rs.getString(3)
-                });
-            }
-            stmt.close();
-            rs.close();
-        } catch (SQLException e) {
-        }
-    }
-
-    @Override
-    public CountryVO obtener(int id) {
+    public CityVO obtener(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public Object[][] getTableCity() {
+        int registros = 0;
+        String sql = "SELECT city_id, city, country_id, Date(last_update) FROM city ";
+        String cantidad = "Select count(*) as total from city ";
+
+        try {
+            PreparedStatement pstm = conn.getConexion().prepareStatement(cantidad);
+            ResultSet res = pstm.executeQuery();
+            res.next();
+            registros = res.getInt("total");
+            res.close();
+            pstm.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        Object[][] data = new String[registros][4];
+        int i = 0;
+        try {
+            PreparedStatement pst = conn.getConexion().prepareStatement(sql);
+            ResultSet resp = pst.executeQuery();
+            while (resp.next()) {
+                data[i][0] = resp.getString(1);
+                data[i][1] = resp.getString(2);
+                data[i][2] = resp.getString(3);
+                data[i][3] = resp.getString(4);
+                i++;
+            }
+            resp.close();
+            pst.close();
+        } catch (SQLException e) {
+        }
+        return data;
+    }
+
 }

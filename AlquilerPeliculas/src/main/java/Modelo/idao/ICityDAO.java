@@ -6,11 +6,15 @@
 package Modelo.idao;
 
 import Modelo.vo.CityVO;
+import javax.swing.JTable;
 
 /**
  *
  * @author ACER E5
  */
-public interface ICityDAO extends DAO<CityVO>{
-    
+public interface ICityDAO extends DAO<CityVO> {
+
+    public Object[][] getTableCity();
+
+    public int getCantidadCity();
 }

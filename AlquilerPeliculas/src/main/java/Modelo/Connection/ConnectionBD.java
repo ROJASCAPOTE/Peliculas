@@ -36,7 +36,7 @@ public class ConnectionBD {
     /**
      * Cadena de conexion
      */
-    private String url = "jdbc:mysql://localhost3306/" + db;
+    private String url;
     /**
      * variable para trabajar con la conexion a la base de datos
      */
@@ -45,114 +45,34 @@ public class ConnectionBD {
     private Statement sentencia;
     private ResultSet resultado;
 
-    /**
-     * Constructor de clase
-     */
-    public ConnectionBD() {
+    private static Connection connect;
+    private static ConnectionBD instance;
 
-    }
-
-    public boolean conectar() {
-        boolean conectado = false;
+    private ConnectionBD() {
         this.url = "jdbc:mysql://localhost:3306/" + this.db + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conexion = DriverManager.getConnection(this.url, this.user, this.password);
-            conectado = true;
-            System.out.println("Clase conexión: conexión exitosa");
-            sentencia = conexion.createStatement();
-            if (conexion != null) {
-                System.out.println("OK base de datos " + this.db + " listo");
-            }
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             System.err.println(e.getMessage());
         }
-        return conectado;
+    }
+
+    public static ConnectionBD getInstance() {
+        //Esto servira para que solo se haga una vez garantizando el patron singleton
+        if (instance == null) {
+            System.out.println("Se crea la instancia solo una vez garantizanco el patron Singleton");
+            instance = new ConnectionBD();
+        }
+
+        return instance;
+
     }
 
     public Connection getConexion() {
         return conexion;
     }
 
-    public void cerrar() {
-        if (conexion != null) {
-            try {
-                if (conexion.isClosed()) {
-                    conexion.close();
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(ConnectionBD.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-
-    public boolean desconectar() {
-        boolean desconecta = false;
-        try {
-            conexion.close();
-            desconecta = true;
-            System.out.println("Clase conexión: desconexión exitosa");
-        } catch (SQLException e) {
-            System.out.println("Error en método desconectar: " + e.getMessage());
-        }
-        return desconecta;
-    }
-
-    public ResultSet RealizarConsulta(String query) {
-        try {
-            resultado = sentencia.executeQuery(query);
-        } catch (SQLException e) {
-            System.out.println("Error en RealizarConsulta: " + e.getMessage());
-        }
-        return resultado;
-    }
-
-    public void IngresarDatos(String query) {
-        try {
-            sentencia.executeUpdate(query);
-        } catch (SQLException e) {
-            System.out.println("Error en IngresarDatos: " + e.getMessage());
-        }
-    }
-
-    public boolean agregarDatosBD(String query) {
-
-        boolean realizado;
-        try {
-            realizado = true;
-            sentencia.executeLargeUpdate(query);
-        } catch (SQLException e) {
-            realizado = false;
-            JOptionPane.showMessageDialog(null, e.getMessage().substring(26, 76), "Error", JOptionPane.ERROR_MESSAGE);
-            //System.out.println(e.getMessage().substring(26,76));
-        }
-        return realizado;
-    }
-
-    public boolean eliminarDatos(String query) {
-        boolean eliminado;
-        try {
-            sentencia.execute(query);
-            eliminado = true;
-        } catch (SQLException e) {
-            eliminado = false;
-            System.out.println(e.getMessage().substring(26, 32));
-        }
-        return eliminado;
-    }
-
-    public boolean actualizarDatos(String query) {
-        boolean realizado;
-        try {
-            sentencia.execute(query);
-            realizado = true;
-        } catch (SQLException e) {
-            realizado = false;
-            System.out.println(e.getMessage());
-        }
-        return realizado;
-    }
+   
 
 }

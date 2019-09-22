@@ -20,4 +20,6 @@ public interface DAOManager {
     StaffDAO getStaffDAO();
 
     StoreDAO getStoreDAO();
+
+    CityDAO getCityDAO();
 }

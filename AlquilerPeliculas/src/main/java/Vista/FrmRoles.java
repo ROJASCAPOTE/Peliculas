@@ -7,7 +7,10 @@ package Vista;
 
 import Model.RolTableModel;
 import Modelo.dao.DAOManager;
+import Modelo.vo.CityVO;
+import Modelo.vo.CountryVO;
 import Modelo.vo.RolVO;
+import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -253,13 +256,10 @@ public class FrmRoles extends javax.swing.JFrame {
         tableRoles.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         tableRoles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         tableRoles.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -353,8 +353,44 @@ public class FrmRoles extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        activarBotonesCRUD(false);
-        activarBotonesGuardar(false);
+        int numId = 0;
+        if (textIdRol.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor ingrese el codigo",
+                    "Advertencia", JOptionPane.ERROR_MESSAGE);
+            textIdRol.requestFocus();
+        } else if (textNombreCorto.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor ingrese el rol",
+                    "Advertencia", JOptionPane.ERROR_MESSAGE);
+            textNombreCorto.requestFocus();
+        } else if (textDescripcion.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor ingrese la descripcion",
+                    "Advertencia", JOptionPane.ERROR_MESSAGE);
+            textDescripcion.requestFocus();
+        } else {
+            String idRol = textIdRol.getText();
+            try {
+                numId = Integer.parseInt(idRol);
+            } catch (NumberFormatException e1) {
+                JOptionPane.showMessageDialog(this, "El id tiene que ser numerico", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            String nombCorto = textNombreCorto.getText();
+            String descRol = textDescripcion.getText();
+            RolVO rolVO = new RolVO();
+            rolVO.setIdRol(numId);
+            rolVO.setNomCorto(nombCorto);
+            rolVO.setDescripcion(descRol);
+            int resultado = manager.gatRlosDAO().registrar(rolVO);
+            if (resultado == 1) {
+                JOptionPane.showMessageDialog(null, "Grabado con Éxito!!!",
+                        "Información", JOptionPane.INFORMATION_MESSAGE);
+                activarBotonesCRUD(false);
+                activarBotonesGuardar(false);
+                listaRoles();
+            }
+        }
+
+
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed

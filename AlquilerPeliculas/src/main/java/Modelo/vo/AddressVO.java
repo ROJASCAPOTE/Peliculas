@@ -1,5 +1,7 @@
 package Modelo.vo;
 
+import java.util.Date;
+
 public class AddressVO {
 
     private int idAddress;
@@ -9,13 +11,17 @@ public class AddressVO {
     private int idCity;
     private String codePostal;
     private String phone;
+    private Date lastUpdate;
 
     public AddressVO() {
+        this.idAddress = 0;
         this.address = "";
         this.address2 = "";
+        this.district = "";
         this.idCity = 0;
         this.codePostal = "";
         this.phone = "";
+        this.lastUpdate = null;
     }
 
     public int getIdAddress() {
@@ -72,6 +78,14 @@ public class AddressVO {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Date getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Date lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
 
     @Override

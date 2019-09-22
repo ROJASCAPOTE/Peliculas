@@ -21,4 +21,6 @@ public interface DAO<T> {
     int eliminar(T a);
 
     List<T> obtenerTodos();
+
+    T obtener(int id);
 }

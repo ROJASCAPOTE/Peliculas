@@ -15,7 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-public class RolesDAO extends ConnectionBD implements IRolesDao {
+public class RolesDAO implements IRolesDao {
+
+    private ConnectionBD conn;
+
+    RolesDAO(ConnectionBD conn) {
+        this.conn = conn;
+    }
 
     @Override
     public int registrar(RolVO rol) {
@@ -23,8 +29,7 @@ public class RolesDAO extends ConnectionBD implements IRolesDao {
         String sql = "INSERT INTO rol(nomCorto, descripcion) VALUES(? ,?)";
         PreparedStatement st = null;
         try {
-            this.conectar();
-            st = this.conexion.prepareStatement(sql);
+            st = conn.getConexion().prepareStatement(sql);
             st.setString(1, rol.getNomCorto());
             st.setString(2, rol.getDescripcion());
             st.executeUpdate();
@@ -41,7 +46,6 @@ public class RolesDAO extends ConnectionBD implements IRolesDao {
                 JOptionPane.showMessageDialog(null, "Código :" + ex.getErrorCode()
                         + "\n " + ex.getMessage());
             }
-            this.cerrar();
         }
         return resultado;
     }
@@ -52,8 +56,7 @@ public class RolesDAO extends ConnectionBD implements IRolesDao {
         String sql = "UPDATE rol SET nomCorto, descripcion WHERE idRol=?";
         PreparedStatement st = null;
         try {
-            this.conectar();
-            st = this.conexion.prepareStatement(sql);
+            st = conn.getConexion().prepareStatement(sql);
             st.setInt(1, rol.getIdRol());
             st.executeUpdate();
             resultado = 1;
@@ -69,7 +72,6 @@ public class RolesDAO extends ConnectionBD implements IRolesDao {
                 JOptionPane.showMessageDialog(null, "Código :" + ex.getErrorCode()
                         + "\n " + ex.getMessage());
             }
-            this.cerrar();
         }
         return resultado;
     }
@@ -80,8 +82,8 @@ public class RolesDAO extends ConnectionBD implements IRolesDao {
         String sql = "DELETE FROM rol WHERE idRol=?";
         PreparedStatement st = null;
         try {
-            this.conectar();
-            st = this.conexion.prepareStatement(sql);
+            st = conn.getConexion().prepareStatement(sql);
+
             st.setInt(1, rol.getIdRol());
             st.executeUpdate();
             resultado = 1;
@@ -97,7 +99,6 @@ public class RolesDAO extends ConnectionBD implements IRolesDao {
                 JOptionPane.showMessageDialog(null, "Código :" + ex.getErrorCode()
                         + "\n " + ex.getMessage());
             }
-            this.cerrar();
         }
         return resultado;
     }
@@ -108,8 +109,7 @@ public class RolesDAO extends ConnectionBD implements IRolesDao {
         String sql = "SELECT * FROM rol";
         PreparedStatement st = null;
         try {
-            this.conectar();
-            st = this.conexion.prepareStatement(sql);
+            st = conn.getConexion().prepareStatement(sql);
             lista = new ArrayList<>();
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
@@ -125,6 +125,11 @@ public class RolesDAO extends ConnectionBD implements IRolesDao {
         }
 
         return lista;
+    }
+
+    @Override
+    public RolVO obtener(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

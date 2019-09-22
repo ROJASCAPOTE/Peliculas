@@ -283,6 +283,44 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        FrmCountry frmCountry = new FrmCountry(manager);
+        frmCountry.setLocationRelativeTo(null);
+        frmCountry.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        FrmCity frmCity = new FrmCity(manager);
+        frmCity.setLocationRelativeTo(null);
+        frmCity.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        FrmAddress frmAddress = new FrmAddress(manager);
+        frmAddress.setLocationRelativeTo(null);
+        frmAddress.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        FrmStaff frmStaff = new FrmStaff();
+        frmStaff.setLocationRelativeTo(null);
+        frmStaff.setVisible(true);
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        FrmStore frmStore = new FrmStore(manager);
+        frmStore.setLocationRelativeTo(null);
+        frmStore.setVisible(true);
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
+
     private void btnTiendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTiendaActionPerformed
         FrmStore frmTienda = new FrmStore(manager);
         frmTienda.setLocationRelativeTo(null);
@@ -306,50 +344,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
         frmRoles.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        FrmCountry frmCountry=new FrmCountry();
-        frmCountry.setLocationRelativeTo(null);
-        frmCountry.setVisible(true);
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
-
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        FrmCity frmCity=new FrmCity();
-        frmCity.setLocationRelativeTo(null);
-        frmCity.setVisible(true);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        FrmAddress frmAddress=new FrmAddress();
-        frmAddress.setLocationRelativeTo(null);
-        frmAddress.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        FrmStaff frmStaff=new FrmStaff();
-        frmStaff.setLocationRelativeTo(null);
-        frmStaff.setVisible(true);
-    }//GEN-LAST:event_jMenuItem10ActionPerformed
-
-    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-        FrmStore frmStore=new FrmStore(manager);
-        frmStore.setLocationRelativeTo(null);
-        frmStore.setVisible(true);
-    }//GEN-LAST:event_jMenuItem11ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCiudades;
     private javax.swing.JButton btnPaises;
     private javax.swing.JButton btnRoles;
-    public javax.swing.JButton btnTienda;
+    private javax.swing.JButton btnTienda;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JMenu jMenu1;

@@ -5,26 +5,34 @@
  */
 package Modelo.vo;
 
+import java.util.Date;
+
 public class StaffVO {
 
     private String firstName;
     private String lastName;
     private int idAddress;
+    private String ruta;
     private String email;
     private int idStore;
     private boolean active;
     private String username;
     private String password;
+    private int roiId;
+    private Date lastUpdate;
 
     public StaffVO() {
         this.firstName = "";
         this.lastName = "";
         this.idAddress = 0;
+        this.ruta = "";
         this.email = "";
         this.idStore = 0;
         this.active = true;
         this.username = "";
         this.password = "";
+        this.roiId = 0;
+        this.lastUpdate = null;
     }
 
     public String getFirstName() {
@@ -49,6 +57,14 @@ public class StaffVO {
 
     public void setIdAddress(int idAddress) {
         this.idAddress = idAddress;
+    }
+
+    public String getRuta() {
+        return ruta;
+    }
+
+    public void setRuta(String ruta) {
+        this.ruta = ruta;
     }
 
     public String getEmail() {
@@ -89,6 +105,22 @@ public class StaffVO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getRoiId() {
+        return roiId;
+    }
+
+    public void setRoiId(int roiId) {
+        this.roiId = roiId;
+    }
+
+    public Date getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Date lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
 
 }

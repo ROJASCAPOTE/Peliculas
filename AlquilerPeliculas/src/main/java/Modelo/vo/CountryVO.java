@@ -53,4 +53,9 @@ public class CountryVO {
         this.lastUpdate = lastUpdate;
     }
 
+    @Override
+    public String toString() {
+        return  country;
+    }
+
 }

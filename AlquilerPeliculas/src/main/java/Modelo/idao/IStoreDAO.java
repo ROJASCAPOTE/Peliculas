@@ -12,5 +12,6 @@ import Modelo.vo.StoreVO;
  * @author ACER E5
  */
 public interface IStoreDAO extends DAO<StoreVO> {
-    
+
+    public int grtCodigoStore();
 }
